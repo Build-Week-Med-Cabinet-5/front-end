@@ -27,7 +27,7 @@ const NavBarComponent = () => {
                         </Link>
                     </NavItem>
                     <NavItem>
-                        <Link to="/protected" className="nav-link">
+                        <Link to="/profile" className="nav-link">
                             Profile
                         </Link>
                     </NavItem>
