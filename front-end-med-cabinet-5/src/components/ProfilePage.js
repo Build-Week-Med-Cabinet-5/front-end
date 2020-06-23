@@ -1,7 +1,16 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { Col, ListGroup, ListGroupItem, Label } from "reactstrap";
+import axiosWithAuth from "../utils/axiosWithAuth";
 
 const ProfilePage = (props) => {
+    const [profileData, setProfileData] = useState({})
+    useEffect(() => {
+        axiosWithAuth()
+            .get('/users')
+            .then(res => {
+                setProfileData(res.data)
+            })
+    }, [])
     return (
         <Col md={{ size: 6, offset: 3}}>
             <ListGroup>
