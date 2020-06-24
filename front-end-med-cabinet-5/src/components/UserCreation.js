@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import * as yup from 'yup';
+import axiosWithAuth from "../utils/axiosWithAuth";
 
 const UserCreation = (props) => {
     const [user, setUser] = useState({
@@ -69,7 +70,8 @@ const UserCreation = (props) => {
 
     const formSubmit = (event) => {
         event.preventDefault();
-        axios.post('https://reqres.in/api/users', user)
+        axiosWithAuth()
+            .post('/auth/register', user)
             .then((response => {
                 setPost([...post, response.data]);
                 setUser({
