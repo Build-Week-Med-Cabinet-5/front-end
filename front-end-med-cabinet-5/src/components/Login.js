@@ -2,14 +2,18 @@ import React from "react";
 import {
     Card, Button
 } from 'reactstrap';
+import { withRouter } from 'react-router-dom';
+
 
 import axiosWithAuth from "../utils/axiosWithAuth";
 import Input from "reactstrap/es/Input";
 
 class Login extends React.Component {
+
+
     state = {
         credentials: {
-            username: "",
+            email: "",
             password: ""
         }
     };
@@ -43,10 +47,10 @@ class Login extends React.Component {
                 <form onSubmit={this.login}>
                     <Input
                         type="text"
-                        name="username"
-                        value={this.state.credentials.username}
+                        name="email"
+                        value={this.state.credentials.email}
                         onChange={this.handleChange}
-                        placeholder="Username"
+                        placeholder="Email"
                     />
                     <Input
                         type="password"
@@ -62,4 +66,4 @@ class Login extends React.Component {
     }
 }
 
-export default Login;
+export default withRouter(Login);

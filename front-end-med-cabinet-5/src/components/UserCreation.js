@@ -1,11 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import * as yup from 'yup';
-import axiosWithAuth from "../utils/axiosWithAuth";
+import Input from "reactstrap/es/Input";
+import {Button} from "reactstrap";
 
 const UserCreation = (props) => {
     const [user, setUser] = useState({
-        username: '',
+        first_name: '',
+        last_name: '',
         email: '',
         password: '',
         confirmPassword: '',
@@ -14,7 +16,8 @@ const UserCreation = (props) => {
     })
 
     const [errors, setErrors] = useState({
-        username: '',
+        first_name: '',
+        last_name: '',
         email: '',
         password: '',
         confirmPassword: '',
@@ -27,7 +30,8 @@ const UserCreation = (props) => {
     const [buttonDisabled, setButtonDisabled] = useState("");
 
     const formSchema = yup.object().shape({
-        username: yup.string().required("Username is a required field"),
+        first_name: yup.string().required("Please enter your first name"),
+        last_name: yup.string().required("Please enter your last name"),
         email: yup.string().email("Must be a valid email").required(),
         password: yup
             .string()
@@ -37,7 +41,7 @@ const UserCreation = (props) => {
         confirmPassword: yup
             .string()
             .required("Must confirm your password")
-            .oneOf([yup.ref('password'), null], 'Passwords do not match'),            
+            .oneOf([yup.ref('password'), null], 'Passwords do not match'),
         location: yup.string().notRequired(),
         terms_of_service: yup.boolean().oneOf([true], "Please agree to terms of service to verify that you are 21 years or older")
     })
@@ -50,32 +54,32 @@ const UserCreation = (props) => {
 
     const validate = (event) => {
         yup
-          .reach(formSchema, event.target.name)
-          .validate(event.target.value)
-          .then((valid) => {
-            setErrors({
-              ...errors,
-              [event.target.name]: "",
+            .reach(formSchema, event.target.name)
+            .validate(event.target.value)
+            .then((valid) => {
+                setErrors({
+                    ...errors,
+                    [event.target.name]: "",
+                });
+            })
+            .catch((error) => {
+                console.log(error.errors)
+                setErrors({
+                    ...errors,
+                    [event.target.name]: error.errors[0]
+                });
+
             });
-          })
-          .catch((error) => {
-              console.log(error.errors)
-            setErrors({
-              ...errors,
-              [event.target.name]: error.errors[0]
-            });
-            
-          });
-      };
+    };
 
     const formSubmit = (event) => {
         event.preventDefault();
-        axiosWithAuth()
-            .post('/auth/register', user)
+        axios.post('https://reqres.in/api/users', user)
             .then((response => {
                 setPost([...post, response.data]);
                 setUser({
-                    username: '',
+                    first_name: '',
+                    last_name: '',
                     email: '',
                     password: '',
                     confirmPassword: '',
@@ -92,36 +96,39 @@ const UserCreation = (props) => {
     const inputChange = (event) => {
         event.persist();
         const newFormData = {
-          ...user,
-          [event.target.name]:
-            event.target.type === "checkbox" ? event.target.checked : event.target.value,
+            ...user,
+            [event.target.name]:
+                event.target.type === "checkbox" ? event.target.checked : event.target.value,
         };
         validate(event);
         setUser(newFormData);
-      };
+    };
 
     return (
         <div className='signUpContainer'>
-            <form onSubmit={formSubmit} className='form'> 
-                <label htmlFor='username'>Username <br />
-                    <input type='text' data-cy='username' name='username' value={user.username} onChange={inputChange} /> {errors.username.length > 0 ? <span className='error'>{errors.username}</span> : null} <br />
+            <form onSubmit={formSubmit} className='form'>
+                <label htmlFor='first_name'>First Name <br />
+                    <Input type='text' data-cy='first_name' name='first_name' value={user.first_name} onChange={inputChange} /> {errors.first_name.length > 0 ? <span className='error'>{errors.first_name}</span> : null} <br />
+                </label>
+                <label htmlFor='last_name'>Last Name <br />
+                    <Input type='text' data-cy='last_name' name='last_name' value={user.last_name} onChange={inputChange} /> {errors.last_name.length > 0 ? <span className='error'>{errors.last_name}</span> : null} <br />
                 </label>
                 <label htmlFor='email'>Email <br />
-                    <input type='text' data-cy='email' name='email' value={user.email} onChange={inputChange} />  {errors.email.length > 0 ? <span className='error'>{errors.email}</span> : null} <br />
+                    <Input type='text' data-cy='email' name='email' value={user.email} onChange={inputChange} />  {errors.email.length > 0 ? <span className='error'>{errors.email}</span> : null} <br />
                 </label>
                 <label htmlFor='password'>Password <br />
-                    <input type='text' data-cy='password' name='password' value={user.password} onChange={inputChange} /> {errors.password.length > 0 ? <span className='error'>{errors.password}</span> : null} <br />
+                    <Input type='text' data-cy='password' name='password' value={user.password} onChange={inputChange} /> {errors.password.length > 0 ? <span className='error'>{errors.password}</span> : null} <br />
                 </label>
                 <label htmlFor='confirmPassword'>Confirm Password <br />
-                    <input type='text' data-cy='confirmPassword' name='confirmPassword' value={user.confirmPassword} onChange={inputChange} /> {errors.confirmPassword.length > 0 ? <span className='error'>{errors.confirmPassword}</span> : null} <br />
+                    <Input type='text' data-cy='confirmPassword' name='confirmPassword' value={user.confirmPassword} onChange={inputChange} /> {errors.confirmPassword.length > 0 ? <span className='error'>{errors.confirmPassword}</span> : null} <br />
                 </label>
                 <label htmlFor='location'>Location <br />
-                    <input type='text' data-cy='location' name='location' value={user.location} onChange={inputChange} /> <br />
+                    <Input type='text' data-cy='location' name='location' value={user.location} onChange={inputChange} /> <br />
                 </label>
-                <label htmlFor='terms_of_service'>I have read the Terms and Conditions and am of the age 21 or older &nbsp;
-                    <input type='checkbox' data-cy='terms_of_service' name='terms_of_service' onChange={inputChange} checked={user.terms_of_service} /> <br />
+                <label htmlFor='terms_of_service'>I have read the Terms and Conditions and am of the age 21 or older &nbsp; &nbsp; &nbsp;
+                    <Input type='checkbox' data-cy='terms_of_service' name='terms_of_service' onChange={inputChange} checked={user.terms_of_service} /> <br />
                 </label>
-                <button disabled={buttonDisabled} data-cy='submit'>Submit</button>
+                <Button disabled={buttonDisabled} data-cy='submit'>Submit</Button>
             </form>
         </div>
     )
