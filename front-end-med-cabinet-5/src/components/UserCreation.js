@@ -1,10 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import * as yup from 'yup';
+import Input from "reactstrap/es/Input";
+import {Button} from "reactstrap";
 
 const UserCreation = (props) => {
     const [user, setUser] = useState({
-        username: '',
+        first_name: '',
+        last_name: '',
         email: '',
         password: '',
         confirmPassword: '',
@@ -13,7 +16,8 @@ const UserCreation = (props) => {
     })
 
     const [errors, setErrors] = useState({
-        username: '',
+        first_name: '',
+        last_name: '',
         email: '',
         password: '',
         confirmPassword: '',
@@ -26,7 +30,8 @@ const UserCreation = (props) => {
     const [buttonDisabled, setButtonDisabled] = useState("");
 
     const formSchema = yup.object().shape({
-        username: yup.string().required("Username is a required field"),
+        first_name: yup.string().required("Please enter your first name"),
+        last_name: yup.string().required("Please enter your last name"),
         email: yup.string().email("Must be a valid email").required(),
         password: yup
             .string()
@@ -73,7 +78,8 @@ const UserCreation = (props) => {
             .then((response => {
                 setPost([...post, response.data]);
                 setUser({
-                    username: '',
+                    first_name: '',
+                    last_name: '',
                     email: '',
                     password: '',
                     confirmPassword: '',
@@ -101,25 +107,28 @@ const UserCreation = (props) => {
     return (
         <div className='signUpContainer'>
             <form onSubmit={formSubmit} className='form'> 
-                <label htmlFor='username'>Username <br />
-                    <input type='text' data-cy='username' name='username' value={user.username} onChange={inputChange} /> {errors.username.length > 0 ? <span className='error'>{errors.username}</span> : null} <br />
+                <label htmlFor='first_name'>First Name <br />
+                    <Input type='text' data-cy='first_name' name='first_name' value={user.first_name} onChange={inputChange} /> {errors.first_name.length > 0 ? <span className='error'>{errors.first_name}</span> : null} <br />
+                </label>
+                <label htmlFor='last_name'>Last Name <br />
+                    <Input type='text' data-cy='last_name' name='last_name' value={user.last_name} onChange={inputChange} /> {errors.last_name.length > 0 ? <span className='error'>{errors.last_name}</span> : null} <br />
                 </label>
                 <label htmlFor='email'>Email <br />
-                    <input type='text' data-cy='email' name='email' value={user.email} onChange={inputChange} />  {errors.email.length > 0 ? <span className='error'>{errors.email}</span> : null} <br />
+                    <Input type='text' data-cy='email' name='email' value={user.email} onChange={inputChange} />  {errors.email.length > 0 ? <span className='error'>{errors.email}</span> : null} <br />
                 </label>
                 <label htmlFor='password'>Password <br />
-                    <input type='text' data-cy='password' name='password' value={user.password} onChange={inputChange} /> {errors.password.length > 0 ? <span className='error'>{errors.password}</span> : null} <br />
+                    <Input type='text' data-cy='password' name='password' value={user.password} onChange={inputChange} /> {errors.password.length > 0 ? <span className='error'>{errors.password}</span> : null} <br />
                 </label>
                 <label htmlFor='confirmPassword'>Confirm Password <br />
-                    <input type='text' data-cy='confirmPassword' name='confirmPassword' value={user.confirmPassword} onChange={inputChange} /> {errors.confirmPassword.length > 0 ? <span className='error'>{errors.confirmPassword}</span> : null} <br />
+                    <Input type='text' data-cy='confirmPassword' name='confirmPassword' value={user.confirmPassword} onChange={inputChange} /> {errors.confirmPassword.length > 0 ? <span className='error'>{errors.confirmPassword}</span> : null} <br />
                 </label>
                 <label htmlFor='location'>Location <br />
-                    <input type='text' data-cy='location' name='location' value={user.location} onChange={inputChange} /> <br />
+                    <Input type='text' data-cy='location' name='location' value={user.location} onChange={inputChange} /> <br />
                 </label>
-                <label htmlFor='terms_of_service'>I have read the Terms and Conditions and am of the age 21 or older &nbsp;
-                    <input type='checkbox' data-cy='terms_of_service' name='terms_of_service' onChange={inputChange} checked={user.terms_of_service} /> <br />
+                <label htmlFor='terms_of_service'>I have read the Terms and Conditions and am of the age 21 or older &nbsp; &nbsp; &nbsp;
+                    <Input type='checkbox' data-cy='terms_of_service' name='terms_of_service' onChange={inputChange} checked={user.terms_of_service} /> <br />
                 </label>
-                <button disabled={buttonDisabled} data-cy='submit'>Submit</button>
+                <Button disabled={buttonDisabled} data-cy='submit'>Submit</Button>
             </form>
         </div>
     )
