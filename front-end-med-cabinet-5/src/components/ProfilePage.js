@@ -6,8 +6,9 @@ const ProfilePage = (props) => {
     const [profileData, setProfileData] = useState({})
     useEffect(() => {
         axiosWithAuth()
-            .get('/users')
+            .get('/users/${token.id}')
             .then(res => {
+                console.log(res)
                 setProfileData(res.data)
             })
     }, [])

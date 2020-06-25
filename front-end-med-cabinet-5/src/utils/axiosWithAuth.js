@@ -4,7 +4,7 @@ const axiosWithAuth = () => {
     const token = localStorage.getItem("token");
 
     return Axios.create({
-        baseURL: "https://med-cab-pg-db.herokuapp.com/api",
+        baseURL: "https://med-cab-db.herokuapp.com/api",
         headers: {
             Authorization: token
         }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link, Switch, withRouter} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import UserCreation from './components/UserCreation';
 import Login from "./components/Login";
 import { Container } from "reactstrap";
