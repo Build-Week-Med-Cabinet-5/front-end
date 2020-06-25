@@ -3,10 +3,10 @@ import { Col, ListGroup, ListGroupItem, Label } from "reactstrap";
 import axiosWithAuth from "../utils/axiosWithAuth";
 
 const ProfilePage = (props) => {
-    const [profileData, setProfileData] = useState({})
+    const [profileData, setProfileData] = useState([])
     useEffect(() => {
         axiosWithAuth()
-            .get('/users/${token.id}')
+            .get(`/users`)// /${id}
             .then(res => {
                 console.log(res)
                 setProfileData(res.data)

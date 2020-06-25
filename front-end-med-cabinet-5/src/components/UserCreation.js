@@ -41,7 +41,7 @@ const UserCreation = (props) => {
         confirmPassword: yup
             .string()
             .required("Must confirm your password")
-            .oneOf([yup.ref('password'), null], 'Passwords do not match'),
+            .oneOf([user.password], 'Passwords do not match'),
         location: yup.string().notRequired(),
         terms_of_service: yup.boolean().oneOf([true], "Please agree to terms of service to verify that you are 21 years or older")
     })
@@ -83,6 +83,7 @@ const UserCreation = (props) => {
             .then((response => {
                 setPost([...post, response.data]);
                 console.log(user)
+                props.history.push('/profile');
             }))
             .catch((error) => {
                 console.log(error.response)

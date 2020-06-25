@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import UserCreation from './components/UserCreation';
 import Login from "./components/Login";
@@ -6,9 +6,9 @@ import { Container } from "reactstrap";
 import NavBarComponent from "./components/NavBarComponent";
 import PrivateRoute from "./components/PrivateRoute";
 import ProfilePage from "./components/ProfilePage";
-import StrainSearch from "./components/StrainSearch";
-import {StrainContext} from './Context/StrainContext';
 import {UserContext} from "./Context/UserContext";
+import axios from "axios";
+import StrainCard from "./components/StrainCard";
 
 function App() {
 
@@ -18,6 +18,8 @@ function App() {
           <Container className="App">
               <NavBarComponent />
               <Switch>
+                  <PrivateRoute path='/strains' component={StrainCard}/>
+                  <PrivateRoute path='/strains/:strain' />
                   <Route exact path='/'>
                       <Login />
                   </Route>
@@ -30,9 +32,8 @@ function App() {
                   <UserContext.Provider value={null}>
                       <PrivateRoute exact path="/profile" component={ProfilePage}/>
                   </UserContext.Provider>
-                  <StrainContext.Provider value={null}>
-                      <PrivateRoute exact path='/search' component={StrainSearch}/>
-                  </StrainContext.Provider>
+
+
               </Switch>
 
           </Container>
