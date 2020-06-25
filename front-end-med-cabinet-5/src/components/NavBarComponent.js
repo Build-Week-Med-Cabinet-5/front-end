@@ -31,6 +31,11 @@ const NavBarComponent = () => {
                             Profile
                         </Link>
                     </NavItem>
+                    <NavItem>
+                        <Link to="/strains" className="nav-link">
+                            Strains
+                        </Link>
+                    </NavItem>
                 </Nav>
             </Navbar>
         </Col>

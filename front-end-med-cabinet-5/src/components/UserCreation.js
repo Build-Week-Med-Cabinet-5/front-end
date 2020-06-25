@@ -89,7 +89,7 @@ const UserCreation = (props) => {
                 console.log(user)
             }))
             .catch((error) => {
-                console.log(error)
+                console.log('Error', error.message)
             })
     }
 
