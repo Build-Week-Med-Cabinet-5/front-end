@@ -27,7 +27,7 @@ const UserCreation = (props) => {
 
     const [post, setPost] = useState([]);
 
-    const [buttonDisabled, setButtonDisabled] = useState("");
+    const [buttonDisabled, setButtonDisabled] = useState(false);
 
     const formSchema = yup.object().shape({
         first_name: yup.string().required("Please enter your first name"),
@@ -41,7 +41,7 @@ const UserCreation = (props) => {
         confirmPassword: yup
             .string()
             .required("Must confirm your password")
-            .oneOf([yup.ref('password'), null], 'Passwords do not match'),            
+            .oneOf([user.password], 'Passwords do not match'),            
         location: yup.string().notRequired(),
         terms_of_service: yup.boolean().oneOf([true], "Please agree to terms of service to verify that you are 21 years or older")
     })
@@ -109,25 +109,25 @@ const UserCreation = (props) => {
             <form onSubmit={formSubmit} className='form'> 
                 <label htmlFor='first_name'>First Name <br />
                     <Input type='text' data-cy='first_name' name='first_name' value={user.first_name} onChange={inputChange} /> {errors.first_name.length > 0 ? <span className='error'>{errors.first_name}</span> : null} <br />
-                </label>
+                </label> <br />
                 <label htmlFor='last_name'>Last Name <br />
                     <Input type='text' data-cy='last_name' name='last_name' value={user.last_name} onChange={inputChange} /> {errors.last_name.length > 0 ? <span className='error'>{errors.last_name}</span> : null} <br />
-                </label>
+                </label> <br />
                 <label htmlFor='email'>Email <br />
                     <Input type='text' data-cy='email' name='email' value={user.email} onChange={inputChange} />  {errors.email.length > 0 ? <span className='error'>{errors.email}</span> : null} <br />
-                </label>
+                </label> <br />
                 <label htmlFor='password'>Password <br />
                     <Input type='text' data-cy='password' name='password' value={user.password} onChange={inputChange} /> {errors.password.length > 0 ? <span className='error'>{errors.password}</span> : null} <br />
-                </label>
+                </label> <br />
                 <label htmlFor='confirmPassword'>Confirm Password <br />
                     <Input type='text' data-cy='confirmPassword' name='confirmPassword' value={user.confirmPassword} onChange={inputChange} /> {errors.confirmPassword.length > 0 ? <span className='error'>{errors.confirmPassword}</span> : null} <br />
-                </label>
+                </label> <br />
                 <label htmlFor='location'>Location <br />
                     <Input type='text' data-cy='location' name='location' value={user.location} onChange={inputChange} /> <br />
-                </label>
+                </label> <br />
                 <label htmlFor='terms_of_service'>I have read the Terms and Conditions and am of the age 21 or older &nbsp; &nbsp; &nbsp;
                     <Input type='checkbox' data-cy='terms_of_service' name='terms_of_service' onChange={inputChange} checked={user.terms_of_service} /> <br />
-                </label>
+                </label> <br />
                 <Button disabled={buttonDisabled} data-cy='submit'>Submit</Button>
             </form>
         </div>
