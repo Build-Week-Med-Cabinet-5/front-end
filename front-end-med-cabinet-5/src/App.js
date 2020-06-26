@@ -9,6 +9,7 @@ import ProfilePage from "./components/ProfilePage";
 import {UserContext} from "./Context/UserContext";
 import axios from "axios";
 import StrainCard from "./components/StrainCard";
+import StrainRecommender from "./components/StrainRecommender";
 
 function App() {
 
