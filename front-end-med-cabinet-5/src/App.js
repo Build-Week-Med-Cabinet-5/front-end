@@ -6,10 +6,7 @@ import { Container } from "reactstrap";
 import NavBarComponent from "./components/NavBarComponent";
 import PrivateRoute from "./components/PrivateRoute";
 import ProfilePage from "./components/ProfilePage";
-import {UserContext} from "./Context/UserContext";
-import axios from "axios";
 import StrainCard from "./components/StrainCard";
-import StrainRecommender from "./components/StrainRecommender";
 
 function App() {
 
@@ -30,11 +27,7 @@ function App() {
                   <Route exact path='/signup'>
                       <UserCreation />
                   </Route>
-                  <UserContext.Provider value={null}>
-                      <PrivateRoute exact path="/profile" component={ProfilePage}/>
-                  </UserContext.Provider>
-
-
+                  <PrivateRoute exact path="/profile" component={ProfilePage}/>
               </Switch>
 
           </Container>

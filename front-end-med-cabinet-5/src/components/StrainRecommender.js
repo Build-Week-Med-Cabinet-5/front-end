@@ -1,10 +1,9 @@
 import React from "react";
 import axios from "axios";
-import StrainContext from '../Context/StrainContext'
-import * as yup from 'yup';
 
 import {Card, Form, Label, Input, Button, FormGroup} from "reactstrap";
 import axiosWithAuth from "../utils/axiosWithAuth";
+import StrainCard from "./StrainCard";
 
 export default class StrainRecommender extends React.Component {
     state = {
@@ -59,19 +58,22 @@ export default class StrainRecommender extends React.Component {
 
     render() {
         return (
-
-                <Form onSubmit={this.submitEffects}>
+                <div>
+                    <Form onSubmit={this.submitEffects}>
                         <Label>
                             Search
                         </Label>
-                    <Input
-                        type="text"
-                        name='Effects'
-                        value={this.state.sendData.Effects}
-                        onChange={this.handleChange}
-                    />
-                    <Button>Submit</Button>
-                </Form>
+                        <Input
+                            type="text"
+                            name='Effects'
+                            value={this.state.sendData.Effects}
+                            onChange={this.handleChange}
+                        />
+                        <Button>Submit</Button>
+                    </Form>
+                    <StrainCard strain={this.state.strain} key={this.state.strain.id}/>
+                </div>
+
 
         )
     }
