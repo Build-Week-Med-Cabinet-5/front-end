@@ -1,13 +1,15 @@
 import React, {useEffect, useState} from "react";
 import { Col, ListGroup, ListGroupItem, Label } from "reactstrap";
 import axiosWithAuth from "../utils/axiosWithAuth";
+import StrainRecommender from "./StrainRecommender";
 
 const ProfilePage = (props) => {
-    const [profileData, setProfileData] = useState({})
+    const [profileData, setProfileData] = useState([])
     useEffect(() => {
         axiosWithAuth()
-            .get('/users')
+            .get(`/users`)// /${id}
             .then(res => {
+                console.log(res.data)
                 setProfileData(res.data)
             })
     }, [])
@@ -37,6 +39,7 @@ const ProfilePage = (props) => {
                     </p>
                 </ListGroupItem>
             </ListGroup>
+            <StrainRecommender/>
         </Col>
     );
 }
