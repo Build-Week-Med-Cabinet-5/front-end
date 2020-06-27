@@ -7,12 +7,13 @@ const ProfilePage = (props) => {
     const [profileData, setProfileData] = useState([])
     useEffect(() => {
         axiosWithAuth()
-            .get(`/users`)// /${id}
+            .get(`/strain_recommendations`)// /${id}
             .then(res => {
                 console.log(res.data)
                 setProfileData(res.data)
             })
     }, [])
+
     return (
         <Col md={{ size: 6, offset: 3}}>
             <ListGroup>
