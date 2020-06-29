@@ -27,13 +27,18 @@ const NavBarComponent = () => {
                         </Link>
                     </NavItem>
                     <NavItem>
-                        <Link to="/protected" className="nav-link">
+                        <Link to="/profile" className="nav-link">
                             Profile
                         </Link>
                     </NavItem>
                     <NavItem>
                         <Link to="/strains" className="nav-link">
                             Strains
+                        </Link>
+                    </NavItem>
+                    <NavItem>
+                        <Link to='/savedstrains' className="nav-link">
+                            Saved
                         </Link>
                     </NavItem>
                 </Nav>

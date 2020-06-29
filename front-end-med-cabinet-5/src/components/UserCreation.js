@@ -74,7 +74,12 @@ const UserCreation = (props) => {
 
     const formSubmit = (event) => {
         event.preventDefault();
-        axios.post('https://reqres.in/api/users', user)
+        axios.post('https://med-cab-db.herokuapp.com/api/auth/register', {
+            first_name: user.first_name,
+            last_name: user.last_name,
+            email: user.email,
+            password: user.password
+        })
             .then((response => {
                 setPost([...post, response.data]);
                 setUser({
