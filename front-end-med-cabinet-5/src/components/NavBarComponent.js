@@ -36,11 +36,14 @@ const NavBarComponent = () => {
                             Strains
                         </Link>
                     </NavItem>
+<<<<<<< HEAD
                     <NavItem>
                         <Link to='/savedstrains' className="nav-link">
                             Saved
                         </Link>
                     </NavItem>
+=======
+>>>>>>> 2510ff15d58ec914859f478d8f3d8002726eff0c
                 </Nav>
             </Navbar>
         </Col>

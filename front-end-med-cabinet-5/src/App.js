@@ -1,11 +1,17 @@
+<<<<<<< HEAD
 import React, {useEffect, useState} from 'react';
 import { Route, Switch } from 'react-router-dom';
 import axios from 'axios';
+=======
+import React, {useEffect, useState } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+>>>>>>> 2510ff15d58ec914859f478d8f3d8002726eff0c
 import UserCreation from './components/UserCreation';
 import Login from "./components/Login";
 import StrainCard from './components/StrainCard';
 import { Container } from "reactstrap";
 import NavBarComponent from "./components/NavBarComponent";
+<<<<<<< HEAD
 import SavedStrain from './components/SavedStrain';
 import StrainDetails from './components/StrainDetails';
 import PrivateRoute from './components/PrivateRoute';
@@ -79,6 +85,44 @@ console.log(strains)
       <Route exact path='/strains/:strain' render = {(props) => <StrainDetails {...props} strains={strains} addToSavedList={addToSavedList} savedList={savedList} />} />
       <Route exact path='/savedstrains' render = {(props) => <SavedStrain {...props} savedList={savedList} removeFromSavedList={removeFromSavedList} editSavedStrain={editSavedStrain} /> } />
     </Container>
+=======
+import PrivateRoute from "./components/PrivateRoute";
+import ProfilePage from "./components/ProfilePage";
+import {UserContext} from "./Context/UserContext";
+import axios from "axios";
+import StrainCard from "./components/StrainCard";
+import StrainRecommender from "./components/StrainRecommender";
+
+function App() {
+
+
+  return (
+      <Router>
+          <Container className="App">
+              <NavBarComponent />
+              <Switch>
+                  <PrivateRoute path='/strains' component={StrainCard}/>
+                  <PrivateRoute path='/strains/:strain' />
+                  <Route exact path='/'>
+                      <Login />
+                  </Route>
+                  <Route exact path='/login'>
+                      <Login />
+                  </Route>
+                  <Route exact path='/signup'>
+                      <UserCreation />
+                  </Route>
+                  <UserContext.Provider value={null}>
+                      <PrivateRoute exact path="/profile" component={ProfilePage}/>
+                  </UserContext.Provider>
+
+
+              </Switch>
+
+          </Container>
+      </Router>
+
+>>>>>>> 2510ff15d58ec914859f478d8f3d8002726eff0c
   );
 }
 
