@@ -1,10 +1,6 @@
 import React from "react";
 import axios from "axios";
-<<<<<<< HEAD
 import StrainContext from './../context/StrainContext'
-=======
-import StrainContext from '../Context/StrainContext'
->>>>>>> 2510ff15d58ec914859f478d8f3d8002726eff0c
 import * as yup from 'yup';
 
 import {Card, Form, Label, Input, Button, FormGroup} from "reactstrap";

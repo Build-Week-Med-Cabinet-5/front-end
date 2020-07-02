@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import {Card} from 'reactstrap';
@@ -37,21 +36,3 @@ const Strain = ({strain, strains, type}) => {
 }
 
 export default Strain;
-=======
-// import React, {useState} from 'react';
-// import {Link} from 'react-router-dom';
-// import {Card} from 'reactstrap';
-
-// const Strain = ({strain, card}) => {
-
-//     const [type, setType] = useState('Sativa');
-//     //const {Strain, id, type, flavors, effects} = strain;
-//     //console.log(card[`${strain}`])
-//     let x = card[`${strain}`];
-//     return (
-
-//     )
-// }
-
-// export default Strain;
->>>>>>> 2510ff15d58ec914859f478d8f3d8002726eff0c
