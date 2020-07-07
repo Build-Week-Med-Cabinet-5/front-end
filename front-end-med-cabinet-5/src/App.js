@@ -9,8 +9,8 @@ import NavBarComponent from "./components/NavBarComponent";
 import SavedStrain from './components/SavedStrain';
 import StrainDetails from './components/StrainDetails';
 import PrivateRoute from './components/PrivateRoute';
-import {UserContext} from "./context/UserContext";
-import {StrainContext} from "./context/StrainContext";
+import {UserContext} from "./Context/UserContext";
+import {StrainContext} from "./Context/StrainContext";
 import StrainRecommender from "./components/StrainRecommender";
 import ProfilePage from "./components/ProfilePage";
 
@@ -46,7 +46,7 @@ console.log(strains)
   };
 
   const removeFromSavedList = (strain) => {
-    let x = savedList.filter(element => `${element}` !== `${strain}`);
+    let x = savedList.filter(element => `${element}` == `${strain}`);
     console.log(x)
     setSavedList(x)
   }
