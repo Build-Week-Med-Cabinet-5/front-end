@@ -77,7 +77,7 @@ console.log(strains)
         </Switch>
       <Route exact path='/strains' render= { () => <StrainCard strains={strains} />} />
       <Route exact path='/strains/:strain' render = {(props) => <StrainDetails {...props} strains={strains} addToSavedList={addToSavedList} savedList={savedList} />} />
-      <Route exact path='/savedstrains' render = {(props) => <SavedStrain {...props} savedList={savedList} removeFromSavedList={removeFromSavedList} editSavedStrain={editSavedStrain} /> } />
+      <Route exact path='/savedstrains' render = {(props) => <SavedStrain {...props} savedList={savedList} setSavedList={setSavedList} removeFromSavedList={removeFromSavedList} editSavedStrain={editSavedStrain} /> } />
     </Container>
   );
 }

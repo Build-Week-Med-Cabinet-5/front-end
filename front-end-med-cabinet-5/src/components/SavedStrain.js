@@ -14,7 +14,9 @@ const SavedStrain = (props) => {
 
   const handleKeyDown = (e, strain) => {
     if(e.key === 'Enter') {
-      name.textContent = e.target.value;
+      let array = props.savedList;
+      props.setSavedList([array[e.target.id] = e.target.value])
+      console.log(props.savedList)
     }
   }
 
@@ -27,10 +29,10 @@ const SavedStrain = (props) => {
     <div className="saved-list">
       <h3> Saved Strains: </h3>
 
-      {props.savedList.map(strain => (
+      {props.savedList.map((strain, i) => (
         <div>
           <NavLink to={`/strains/${strain}`}>
-            <span className='name'> {strain} </span>
+            <span className='name' key={i}> {strain} </span>
           </NavLink>
           <Button className='delete' onClick={removeResponse}>Delete</Button>
           <Button className='edit' onClick={() => {setEditing(true)}}>Edit</Button>
